@@ -29,14 +29,14 @@
         "symfony/serializer": "^5.4",
         "symfony/uid": "^5.3",
         "tecnickcom/tcpdf": "^6.3",
-        "twig/extensions": "^1.5",
+        "twig/intl-extra": "^3.0",
         "twig/string-extra": "^3.3",
-        "twig/twig": "^v2.14",
+        "twig/twig": "^3.0",
         "vanilla/htmlawed": "^2.2"
     },
     "require-dev": {
         "phing/phing": "^2.13",
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-master",
         "simpletest/simpletest": "^1.1",
         "symfony/var-dumper": "^v5.3"
@@ -47,7 +47,8 @@
         "platform": {
             "php": "7.4"
         },
-        "vendor-dir": "vendor"
+        "vendor-dir": "vendor",
+        "github-protocols": ["https"]
     },
     "autoload": {
         "psr-4": {
