@@ -609,12 +609,21 @@ function fixQuestSequence()
     WHERE idTest = '$idTest' 
     ORDER BY page, sequence");
     $seq = 1;
+    $cases = [];
+    $ids = [];
     while (list($id_quest) = sql_fetch_row($re_quest)) {
+        $cases[] = "WHEN idQuest = " . (int) $id_quest . " THEN " . $seq;
+        $ids[] = (int) $id_quest;
+        ++$seq;
+    }
+
+    if (!empty($ids)) {
+        $idsList = implode(',', $ids);
+        $casesStr = implode(' ', $cases);
         sql_query('
         UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
-        SET sequence = '$seq' 
-        WHERE idQuest = '$id_quest'");
-        ++$seq;
+        SET sequence = CASE $casesStr ELSE sequence END
+        WHERE idQuest IN ($idsList)");
     }
     fixPageSequence($idTest);
     Util::jump_to('index.php?modname=test&op=modtestgui&idTest=' . $idTest . '&back_url=' . $back_coded);
