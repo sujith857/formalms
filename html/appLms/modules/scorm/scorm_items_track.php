@@ -328,7 +328,6 @@ class Scorm_ItemsTrack
      * @return all items childs of a specified item as a array of idscorm_item
      *             return FALSE in case of error
      *             return an empty array if there isn't no child items
-     *             FIXME: This function return only the first child!!!!
      **/
     public function getChildItems($idReference, $idscorm_item, $idscorm_organization = null)
     {
@@ -352,7 +351,10 @@ class Scorm_ItemsTrack
 
             return $result;
         } else {
-            $result = sql_fetch_row($rs);
+            $result = [];
+            while ($row = sql_fetch_row($rs)) {
+                $result[] = $row[0];
+            }
 
             return $result;
         }
@@ -372,7 +374,6 @@ class Scorm_ItemsTrack
      * @return An array with the idscorm_item of all the items descendant;
      *            if error return FALSE; if there isn't no descendants items return an
      *            empty array
-     *            FIXME: This function return only the first child!!!!
      **/
     public function getDescendantItems($idReference, $idscorm_item, $idscorm_organization = null)
     {
@@ -423,7 +424,6 @@ class Scorm_ItemsTrack
     /**
      * Scorm_ItemsTrack::getSiblingItem
      *	Return an array with all siblings
-     * FIXME: this function return only the first sibling!!!!
      **/
     public function getSiblingsItems($idReference, $idscorm_item)
     {
