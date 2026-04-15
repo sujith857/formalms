@@ -1765,15 +1765,30 @@ function modassignpoint()
         $re_quest = sql_query($query_question);
 
         $score_assign = [];
+        $update_cases = [];
+        $update_ids = [];
+
         while (list($idQuest, $type_quest, $type_file, $type_class) = sql_fetch_row($re_quest)) {
-            sql_query('
-            UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
-            SET difficult = '" . (int) $_REQUEST['new_difficult_quest'][$idQuest] . "'
-            WHERE idTest = '" . $idTest . "' AND idQuest = '" . (int) $idQuest . "'");
+            $idQuestInt = (int) $idQuest;
+            $difficult = (int) $_REQUEST['new_difficult_quest'][$idQuest];
+
+            $update_cases[] = "WHEN idQuest = '" . $idQuestInt . "' THEN '" . $difficult . "'";
+            $update_ids[] = "'" . $idQuestInt . "'";
 
             require_once Forma::inc(_lms_ . '/modules/question/' . $type_file);
-            $quest_obj = eval("return new $type_class( $idQuest );");
+            $quest_obj = new $type_class($idQuest);
             $score_assign[$idQuest] = $quest_obj->setMaxScore($_REQUEST['new_score_quest'][$idQuest]);
+        }
+
+        if (!empty($update_ids)) {
+            sql_query('
+                UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
+                SET difficult = CASE
+                    " . implode("\n                    ", $update_cases) . "
+                    ELSE difficult
+                END
+                WHERE idTest = '" . $idTest . "' AND idQuest IN (" . implode(", ", $update_ids) . ")
+            ");
         }
     }
 
