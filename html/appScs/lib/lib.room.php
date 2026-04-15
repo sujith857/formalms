@@ -32,7 +32,7 @@ function getRoomRules($id_room)
 		enable_drawboard_watch, enable_drawboard_write,
 		enable_audio, enable_webcam, enable_stream_watch, enable_strem_write, enable_remote_desktop
 	FROM ' . $GLOBALS['prefix_scs'] . "_rules_room
-	WHERE id_room = '" . $id_room . "'";
+	WHERE id_room = '" . (int)$id_room . "'";
     $re_rules_admin = sql_query($query_rules_admin);
 
     return sql_fetch_assoc($re_rules_admin);
@@ -43,6 +43,8 @@ function insertRoom($array_source)
     $variable = '';
     $values = '';
     foreach ($array_source as $var_name => $var_value) {
+        $var_name = preg_replace('/[^a-zA-Z0-9_]/', '', $var_name);
+        $var_value = sql_escape_string($var_value);
         $variable .= $var_name . ', ';
         $values .= "'" . $var_value . "', ";
     }
@@ -61,10 +63,12 @@ function updateRoom($id_room, $array_source)
 {
     $query_update = 'UPDATE ' . $GLOBALS['prefix_scs'] . '_rules_room SET ';
     foreach ($array_source as $var_name => $var_value) {
+        $var_name = preg_replace('/[^a-zA-Z0-9_]/', '', $var_name);
+        $var_value = sql_escape_string($var_value);
         $query_update .= $var_name . " = '" . $var_value . "', ";
     }
     $query_update = substr($query_update, 0, -2);
-    $query_update .= " WHERE id_room = '" . $id_room . "'";
+    $query_update .= " WHERE id_room = '" . (int)$id_room . "'";
 
     return sql_query($query_update);
 }
@@ -72,10 +76,10 @@ function updateRoom($id_room, $array_source)
 function deleteRoom($id_room, $room_type = false, $id_source = false)
 {
     if ($room_type == false) {
-        $query_delete = 'DELETE FROM ' . $GLOBALS['prefix_scs'] . "_rules_room WHERE id_room = '" . $id_room . "'";
+        $query_delete = 'DELETE FROM ' . $GLOBALS['prefix_scs'] . "_rules_room WHERE id_room = '" . (int)$id_room . "'";
     } else {
         $query_delete = 'DELETE FROM ' . $GLOBALS['prefix_scs'] . "_rules_room
-		WHERE room_type = '" . $room_type . "' AND id_source = '" . $id_room . "'";
+		WHERE room_type = '" . sql_escape_string($room_type) . "' AND id_source = '" . (int)$id_room . "'";
     }
 
     return sql_query($query_delete);
