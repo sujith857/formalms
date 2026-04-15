@@ -313,6 +313,7 @@ class CartLmsController extends LmsController
                 $this->acl_man->addToGroup($level_idst[3], Docebo::user()->getIdSt());
 
                 if (isset($extra['classroom'])) {
+                    $updated_courseuser = false;
                     foreach ($extra['classroom'] as $id_date) {
                         $model = new SubscriptionAlms($id_course, 0, $id_date);
                         if (!$model->subscribeUser(Docebo::user()->getIdSt(), 3, $waiting)) {
@@ -323,17 +324,21 @@ class CartLmsController extends LmsController
                             $this->session->set('lms_cart', $currentCart);
                             $this->session->save();
 
-                            $query = 'UPDATE %lms_courseuser'
-                                . " SET status = '-2'"
-                                . ' WHERE idUser = ' . Docebo::user()->getIdSt()
-                                . ' AND idCourse = ' . $id_course;
+                            if (!$updated_courseuser) {
+                                $query = 'UPDATE %lms_courseuser'
+                                    . " SET status = '-2'"
+                                    . ' WHERE idUser = ' . Docebo::user()->getIdSt()
+                                    . ' AND idCourse = ' . $id_course;
 
-                            sql_query($query);
+                                sql_query($query);
+                                $updated_courseuser = true;
+                            }
 
                             $total_price += $course_info[$id_course . '_' . $id_date . '_0']['price'];
                         }
                     }
                 } elseif (isset($extra['edition'])) {
+                    $updated_courseuser = false;
                     foreach ($extra['edition'] as $id_edition) {
                         $model = new SubscriptionAlms($id_course, $id_edition, 0);
                         if (!$model->subscribeUser(Docebo::user()->getIdSt(), 3, $waiting)) {
@@ -344,12 +349,15 @@ class CartLmsController extends LmsController
                             $this->session->set('lms_cart', $currentCart);
                             $this->session->save();
 
-                            $query = 'UPDATE %lms_courseuser'
-                                . " SET status = '-2'"
-                                . ' WHERE idUser = ' . Docebo::user()->getIdSt()
-                                . ' AND idCourse = ' . $id_course;
+                            if (!$updated_courseuser) {
+                                $query = 'UPDATE %lms_courseuser'
+                                    . " SET status = '-2'"
+                                    . ' WHERE idUser = ' . Docebo::user()->getIdSt()
+                                    . ' AND idCourse = ' . $id_course;
 
-                            sql_query($query);
+                                sql_query($query);
+                                $updated_courseuser = true;
+                            }
 
                             $total_price += $course_info[$id_course . '_0_' . $id_edition]['price'];
                         }
