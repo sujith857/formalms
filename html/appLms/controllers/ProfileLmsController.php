@@ -233,14 +233,11 @@ class ProfileLmsController extends LmsController
                         </thead>
                         <tbody>';
 
-            // BUG: LRZ no count
-            // #19820
             $total = 0;
             foreach ($course_data as $ctype => $cdata) {
                 if (count($cdata) > 0) {
                     $no_cdata = false;
 
-                    //   $total = 0;
                     foreach ($cdata as $id_course => $data) {
                         $table .= '<tr class="table-credit__row">
                             <td>
@@ -251,7 +248,7 @@ class ProfileLmsController extends LmsController
                             </td>
                         </tr>';
 
-                        $total += $data->credits;
+                        $total += (float) $data->credits;
                     }
                 }
             }
