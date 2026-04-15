@@ -1532,7 +1532,7 @@ Date.prototype.print = function (str) {
 	s["%C"] = 1 + Math.floor(y / 100); // the century number
 	s["%d"] = (d < 10) ? ("0" + d) : d; // the day of the month (range 01 to 31)
 	s["%e"] = d; // the day of the month (range 1 to 31)
-	// FIXME: %D : american date style: %m/%d/%y
+	s["%D"] = ((m < 9) ? ("0" + (1+m)) : (1+m)) + "/" + s["%d"] + "/" + ('' + y).substr(2, 2); // american date style: %m/%d/%y
 	// FIXME: %E, %F, %G, %g, %h (man strftime)
 	s["%H"] = (hr < 10) ? ("0" + hr) : hr; // hour, range 00 to 23 (24h format)
 	s["%I"] = (ir < 10) ? ("0" + ir) : ir; // hour, range 01 to 12 (12h format)
