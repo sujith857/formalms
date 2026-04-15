@@ -63,7 +63,7 @@ class Util
             return $string;
         }
 
-        return preg_replace('/' . $key . '/i', '<span class="highlight">$0</span>', $string);
+        return preg_replace('/' . preg_quote($key, '/') . '/i', '<span class="' . $classname . '">$0</span>', $string);
     }
 
     public static function get_css($css, $is_abspath = false, $print = false)
@@ -951,7 +951,7 @@ function highlightText($string, $key, $classname = 'highlight')
         return $string;
     }
 
-    return preg_replace('/' . $key . '/i', '<span class="highlight">$0</span>', $string);
+    return preg_replace('/' . preg_quote($key, '/') . '/i', '<span class="' . $classname . '">$0</span>', $string);
 }
 function doDebug($text)
 {
