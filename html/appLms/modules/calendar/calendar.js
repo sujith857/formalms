@@ -1533,7 +1533,13 @@ Date.prototype.print = function (str) {
 	s["%d"] = (d < 10) ? ("0" + d) : d; // the day of the month (range 01 to 31)
 	s["%e"] = d; // the day of the month (range 1 to 31)
 	// FIXME: %D : american date style: %m/%d/%y
-	// FIXME: %E, %F, %G, %g, %h (man strftime)
+	// FIXME: %E is a modifier, not fully supported
+	var isoDate = new Date(y, m, d);
+	isoDate.setDate(isoDate.getDate() - (w + 6) % 7 + 3);
+	var isoYear = isoDate.getFullYear();
+	s["%G"] = isoYear; // ISO 8601 week-based year
+	s["%g"] = ('' + isoYear).substr(2, 2); // 2-digit ISO 8601 week-based year
+	s["%h"] = s["%b"]; // equivalent to %b
 	s["%H"] = (hr < 10) ? ("0" + hr) : hr; // hour, range 00 to 23 (24h format)
 	s["%I"] = (ir < 10) ? ("0" + ir) : ir; // hour, range 01 to 12 (12h format)
 	s["%j"] = (dy < 100) ? ((dy < 10) ? ("00" + dy) : ("0" + dy)) : dy; // day of the year (range 001 to 366)
@@ -1557,6 +1563,7 @@ Date.prototype.print = function (str) {
 	// FIXME: %X : preferred time representation for the current locale without the date
 	s["%y"] = ('' + y).substr(2, 2); // year without the century (range 00 to 99)
 	s["%Y"] = y;		// year with the century
+	s["%F"] = s["%Y"] + "-" + s["%m"] + "-" + s["%d"]; // equivalent to %Y-%m-%d
 	s["%%"] = "%";		// a literal '%' character
 
 	var re = /%./g;
