@@ -155,7 +155,7 @@ class Track_Object
         $data = Events::trigger('lms.lo_user.creating', [
             'id_reference' => $idReference,
             'id_user' => $idUser,
-            'object_type' => $objectType,
+            'object_type' => $objectType ? $objectType : $table,
             'id_track' => $idTrack,
             'environment' => $environment,
             'data' => [
@@ -180,22 +180,10 @@ class Track_Object
         $result = sql_query($query)
         or errorCommunication('createTrack' . sql_error());
 
-        //TODO: EVT_OBJECT (§)
-        // include_once (_base_.'/appLms/Events/Lms/LoStatusUpdate.php');
-        // $event = new \appLms\Events\Lms\LoStatusUpdate();
-        // $event->setUser($idUser);
-        // $event->setObjectType((($objectType==FALSE)?($this->objectType):($objectType))); // TODO: $objectTYpe vuoto
-        // $event->setReference($idReference);
-        // $event->setStatus($status);
-        // $event->setDate($dateAttempt);
-        // $event->setTrackType(\appLms\Events\Lms\LoStatusUpdate::CREATE_TRACK);
-        //TODO: EVT_LAUNCH (&)
-        // \appCore\Events\DispatcherManager::dispatch(\appLms\Events\Lms\LoStatusUpdate::EVENT_NAME, $event);
-
         Events::trigger('lms.lo_user.created', [
             'id_reference' => $idReference,
             'id_user' => $idUser,
-            'object_type' => $objectType,
+            'object_type' => $objectType ? $objectType : $table,
             'id_track' => $idTrack,
             'environment' => $environment,
             'data' => [
@@ -254,7 +242,7 @@ class Track_Object
         $data = Events::trigger('lms.lo_user.updating', [
             'id_reference' => $this->idReference,
             'id_user' => $this->idUser,
-            'object_type' => $this->objectType,
+            'object_type' => $this->objectType ? $this->objectType : $this->_table,
             'id_track' => $this->idTrack,
             'environment' => $this->environment,
             'old_data' => [
@@ -290,22 +278,11 @@ class Track_Object
                 return false;
             }
         }
-        //TODO: EVT_OBJECT (§)
-        // include_once (_base_.'/appLms/Events/Lms/LoStatusUpdate.php');
-        // $event = new \appLms\Events\Lms\LoStatusUpdate();
-        // $event->setUser($this->idUser);
-        // $event->setObjectType($this->objectType?$this->objectType:$this->_table); // TODO: $objectTYpe vuoto
-        // $event->setReference($this->idReference);
-        // $event->setStatus($this->status);
-        // $event->setDate($this->dateAttempt);
-        // $event->setTrackType(\appLms\Events\Lms\LoStatusUpdate::UPDATE_TRACK);
-        //TODO: EVT_LAUNCH (&)
-        // \appCore\Events\DispatcherManager::dispatch(\appLms\Events\Lms\LoStatusUpdate::EVENT_NAME, $event);
 
         Events::trigger('lms.lo_user.updated', [
             'id_reference' => $this->idReference,
             'id_user' => $this->idUser,
-            'object_type' => $this->objectType,
+            'object_type' => $this->objectType ? $this->objectType : $this->_table,
             'id_track' => $this->idTrack,
             'environment' => $this->environment,
             'old_data' => [
@@ -347,7 +324,7 @@ class Track_Object
                 $data = Events::trigger('lms.lo_user.updating', [
                     'id_reference' => $this->idReference,
                     'id_user' => $this->idUser,
-                    'object_type' => $this->objectType,
+                    'object_type' => $this->objectType ? $this->objectType : $this->_table,
                     'id_track' => $this->idTrack,
                     'environment' => $this->environment,
                     'old_data' => $old_data,
@@ -364,7 +341,7 @@ class Track_Object
                 Events::trigger('lms.lo_user.updated', [
                     'id_reference' => $this->idReference,
                     'id_user' => $this->idUser,
-                    'object_type' => $this->objectType,
+                    'object_type' => $this->objectType ? $this->objectType : $this->_table,
                     'id_track' => $this->idTrack,
                     'environment' => $this->environment,
                     'old_data' => $old_data,
