@@ -46,14 +46,21 @@ if (!Docebo::user()->isAnonymous()) {
 
         if (isset($_POST['save'])) {
             $query_update = 'UPDATE ' . $GLOBALS['prefix_scs'] . '_rules_admin SET ';
-            if (isset($_POST['rules'])) {
+            $re = false;
+            if (isset($_POST['rules']) && is_array($_POST['rules'])) {
+                $has_fields = false;
                 foreach ($_POST['rules'] as $var_name => $new_value) {
-                    $query_update .= " $var_name = '" . $new_value . "',";
+                    if (preg_match('/^[a-zA-Z0-9_]+$/', $var_name)) {
+                        $query_update .= " " . $var_name . " = '" . sql_escape_string($new_value) . "',";
+                        $has_fields = true;
+                    }
                 }
 
-                $re = sql_query(substr($query_update, 0, -1));
+                if ($has_fields) {
+                    $re = sql_query(substr($query_update, 0, -1));
+                }
             }
-            if ($re) {
+            if (!empty($re)) {
                 $out->add(getResultUi($lang->def('_MOD_OK')));
             } else {
                 $out->add(getErrorUi($lang->def('_MOD_ERR')));
