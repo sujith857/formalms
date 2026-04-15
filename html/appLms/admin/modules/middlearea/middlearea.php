@@ -45,22 +45,30 @@ function view_area()
     $vp = Lang::t('_VIEW_PERMISSION', 'standard');
     $ea = Lang::t('_ENABLE_AREA', 'standard');
 
-    $main_menu = '';
-    foreach ($menu as $item) {
-        // TODO: submenus handling
-        $title = Lang::t($item->name, 'menu_over');
-        $activation_icon = $item->is_active === 'true' ? $active_icon : $noactive_icon;
-        if ($item->of_platform === 'lms') {
-            $main_menu .=
-                <<<HTML
+    $render_menu = function ($items) use (&$render_menu, $active_icon, $noactive_icon, $vp, $ea) {
+        $html = '';
+        foreach ($items as $item) {
+            $title = Lang::t($item->name, 'menu_over');
+            $activation_icon = $item->is_active === 'true' ? $active_icon : $noactive_icon;
+            if ($item->of_platform === 'lms') {
+                $html .=
+                    <<<HTML
 <li id="$item->idMenu">
     <span>$title</span>
     <a class="ico-sprite subs_users" href="index.php?modname=middlearea&op=select_menu_permission&load=1&id=$item->idMenu"><span>$vp</span></a>
     <a class="ico-sprite $activation_icon" href="index.php?modname=middlearea&op=switch_menu_active&id=$item->idMenu"><span>$ea</span></a>
-</li>
+
 HTML;
+                if (!empty($item->submenu)) {
+                    $html .= "<ul>\n" . $render_menu($item->submenu) . "</ul>\n";
+                }
+                $html .= "</li>\n";
+            }
         }
-    }
+        return $html;
+    };
+
+    $main_menu = $render_menu($menu);
     /* NEW MENU */
 
     // Tab list
