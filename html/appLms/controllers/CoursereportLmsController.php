@@ -1725,14 +1725,19 @@ class CoursereportLmsController extends LmsController
 
         $result_track = sql_query($query_track);
 
+        $id_tracks = [];
         while (list($id_track) = sql_fetch_row($result_track)) {
-            $query_track_answer = 'SELECT idQuest, idAnswer'
+            $id_tracks[] = $id_track;
+        }
+
+        if (!empty($id_tracks)) {
+            $query_track_answer = 'SELECT idTrack, idQuest, idAnswer'
                 . ' FROM %lms_testtrack_answer'
-                . " WHERE idTrack = '" . $id_track . "'";
+                . " WHERE idTrack IN (" . implode(',', $id_tracks) . ")";
 
             $result_track_answer = sql_query($query_track_answer);
 
-            while (list($id_quest, $id_answer) = sql_fetch_row($result_track_answer)) {
+            while (list($id_track, $id_quest, $id_answer) = sql_fetch_row($result_track_answer)) {
                 $tracks[$id_track][$id_quest] = $id_answer;
             }
         }
@@ -3768,19 +3773,20 @@ class CoursereportLmsController extends LmsController
 
         $result_track = sql_query($query_track);
 
+        $id_tracks = [];
         while (list($id_track) = sql_fetch_row($result_track)) {
-            $query_track_answer = 'SELECT idQuest, idAnswer, more_info'
+            $id_tracks[] = $id_track;
+        }
+
+        if (!empty($id_tracks)) {
+            $query_track_answer = 'SELECT idTrack, idQuest, idAnswer, more_info'
                 . ' FROM %lms_testtrack_answer'
-                . " WHERE idTrack = '" . $id_track . "'";
-            // COMMENTATO MA NON E' CHIARO COME MAI C'E'????
-            //." AND user_answer = 1";
-            //print_r($query_track_answer.'<br />');
+                . " WHERE idTrack IN (" . implode(',', $id_tracks) . ")";
+
             $result_track_answer = sql_query($query_track_answer);
 
-            //echo $query_track_answer."<br>";
-            while (list($id_quest, $id_answer, $more_info) = sql_fetch_row($result_track_answer)) {
+            while (list($id_track, $id_quest, $id_answer, $more_info) = sql_fetch_row($result_track_answer)) {
                 $tracks[$id_track][$id_quest][$id_answer]['more_info'] = $more_info;
-                //echo " -> ".$id_quest." - ".$id_answer." - ".$more_info."<br>";
             }
         }
 
