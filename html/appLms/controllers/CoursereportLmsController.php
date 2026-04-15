@@ -334,7 +334,7 @@ class CoursereportLmsController extends LmsController
                         case CoursereportLms::SOURCE_OF_TEST:
                                 $testObj = Learning_Test::load($info_report->getIdSource());
 
-                          
+
 
                                 $type = $testObj->getObjectType();
                                 $id = $info_report->getIdSource();
@@ -344,13 +344,13 @@ class CoursereportLmsController extends LmsController
 
                                 if ($mod_perm) {
                                     $chartLink = 'index.php?r=lms/coursereport/testQuestion&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
-                                 
+
 
                                     $editLink = 'index.php?r=lms/coursereport/testvote&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
                                     $trashLinkVisible = false;
                                 } elseif ($view_perm) {
                                     $chartLink = 'index.php?r=lms/coursereport/testQuestion&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
-                                  
+
                                     $trashLinkVisible = false;
                                 }
 
@@ -739,7 +739,7 @@ class CoursereportLmsController extends LmsController
                                                         'active' => false,
                                                     ];
 
-                                        
+
                                                     $courseReportDetailValues[] = $value;
 
                                                 break;
@@ -777,7 +777,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                   
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -788,7 +788,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                               
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     } else {
@@ -801,7 +801,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                     
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -812,7 +812,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                                       
+
                                                             $courseReportDetailValues[] = $value;
                                                         } else {
                                                             $value = [
@@ -823,7 +823,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                      
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -834,7 +834,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                                    
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     }
@@ -849,7 +849,7 @@ class CoursereportLmsController extends LmsController
                                                     'active' => false,
                                                 ];
 
-                                        
+
                                                 $courseReportDetailValues[] = $value;
                                         }
                                     } else {
@@ -861,7 +861,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => false,
                                         ];
 
-                                
+
                                         $courseReportDetailValues[] = $value;
                                     }
 
@@ -885,7 +885,7 @@ class CoursereportLmsController extends LmsController
                                         'active' => false,
                                     ];
 
-                            
+
                                     $courseReportDetailValues[] = $value;
 
                                     $history = $scormItem->getHistory();
@@ -899,7 +899,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => true,
                                         ];
 
-                                  
+
                                         $courseReportDetailValues[] = $value;
                                     }
                                     Events::trigger('lms.coursereport.detail', $event);
@@ -928,7 +928,7 @@ class CoursereportLmsController extends LmsController
                                                         'active' => false,
                                                     ];
 
-                                               
+
                                                     $courseReportDetailValues[] = $value;
 
                                                 break;
@@ -944,7 +944,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                        
+
                                                             $courseReportDetailValues[] = $value;
                                                         } else {
                                                             $value = [
@@ -955,7 +955,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                    
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     } else {
@@ -967,7 +967,7 @@ class CoursereportLmsController extends LmsController
                                                             'active' => false,
                                                         ];
 
-                                               
+
                                                         $courseReportDetailValues[] = $value;
                                                     }
 
@@ -981,7 +981,7 @@ class CoursereportLmsController extends LmsController
                                                     'active' => false,
                                                 ];
 
-                                        
+
                                                 $courseReportDetailValues[] = $value;
                                         }
                                     } else {
@@ -993,7 +993,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => false,
                                         ];
 
-                                  
+
                                         $courseReportDetailValues[] = $value;
                                     }
                                     Events::trigger('lms.coursereport.detail', $event);
@@ -1083,7 +1083,7 @@ class CoursereportLmsController extends LmsController
                 $final_score[$id_user] = round(($user_score / ($sum_max_score + $sum_max_score_scorm)) * $info_final[0]->getMaxScore(), 2);
                 $sql = "
 					SELECT score FROM %lms_coursereport_score
-					WHERE id_user = $id_user 
+					WHERE id_user = $id_user
 					AND id_report = " . $info_final[0]->getIdReport() . '
 					ORDER BY date_attempt DESC LIMIT 1
 				';
@@ -1842,15 +1842,15 @@ class CoursereportLmsController extends LmsController
                   </div><!-- /.modal -->
                   <script type="text/javascript">
                            $( document ).ready(function() {
-                               
+
                                $("#detele-test-track").on( "click", function(event) {
-                                   
+
                                    event.preventDefault();
-                                   
+
                                    window.location.href = "index.php?r=lms/coursereport/testdelete&delete_track=' . md5($id_test . '_' . $id_user . '_' . $number_time) . '&id_test=' . $id_test . '&id_user=' . $id_user . '&number_time=' . $number_time . '&idTrack=' . $id_track . '";
                                });
-                               
-                               
+
+
                                $("#delete_test_track_modal").modal("show");
                            });
 
@@ -2230,34 +2230,35 @@ class CoursereportLmsController extends LmsController
             }
         }
         // Save final scores
-        $exists_final = [];
-        $query_final_score = "SELECT id_user
-	                          FROM %lms_coursereport_score
-	                          WHERE id_report = '" . $info_final['id_report'] . "'";
+        $re = true;
+        $insert_values = [];
+        $date_attempt = date('Y-m-d H:i:s');
+        $report_id = (int)$info_final['id_report'];
 
-        $re_final = sql_query($query_final_score);
-        foreach ($re_final as $item) {
-            $exists_final[$item['id_user']] = $item['id_user'];
+        foreach ($final_score as $user => $score) {
+            $user_id = (int)$user;
+            // score can be a float
+            $score_val = $score;
+
+            $insert_values[] = "(
+                '" . $report_id . "',
+                '" . $user_id . "',
+                '" . $score_val . "',
+                '" . $date_attempt . "'
+            )";
         }
 
-        $re = true;
-
-        while (list($user, $score) = each($final_score)) {
-            if (isset($exists_final[$user])) {
+        if (!empty($insert_values)) {
+            $chunks = array_chunk($insert_values, 500);
+            foreach ($chunks as $chunk) {
                 $query_scores = "
-			UPDATE %lms_coursereport_score
-			SET score = '" . $score . "',
-				date_attempt = '" . date('Y-m-d H:i:s') . "'
-			WHERE id_report = '" . $info_final['id_report'] . "' AND id_user = '" . $user . "'";
-                $re &= sql_query($query_scores);
-            } else {
-                $query_scores = "
-			INSERT INTO  %lms_coursereport_score
-			( id_report, id_user, score, date_attempt ) VALUES (
-				'" . $info_final['id_report'] . "',
-				'" . $user . "',
-				'" . $score . "',
-				'" . date('Y-m-d H:i:s') . "' )";
+                    INSERT INTO %lms_coursereport_score
+                    (id_report, id_user, score, date_attempt)
+                    VALUES " . implode(', ', $chunk) . "
+                    ON DUPLICATE KEY UPDATE
+                    score = VALUES(score),
+                    date_attempt = VALUES(date_attempt)
+                ";
                 $re &= sql_query($query_scores);
             }
         }
