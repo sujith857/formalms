@@ -224,11 +224,13 @@ function addprj()
 
     $out->add(Form::getDropdown($lang->def('_PGROUP'), 'pgroup', 'pgroup', $group_arr));
 
+    $out->add(Form::getOpenFieldset($lang->def('_POPTIONS')));
     $out->add(Form::getCheckbox($lang->def('_PSFILES'), 'psfiles', 'psfiles', 1));
     $out->add(Form::getCheckbox($lang->def('_PSTASKS'), 'pstasks', 'pstasks', 1));
     $out->add(Form::getCheckbox($lang->def('_PSNEWS'), 'psnews', 'psnews', 1));
     $out->add(Form::getCheckbox($lang->def('_PSTODO'), 'pstodo', 'pstodo', 1));
     $out->add(Form::getCheckbox($lang->def('_PSMSG'), 'psmsg', 'psmsg', 1));
+    $out->add(Form::getCloseFieldset());
 
     $out->add(Form::getHidden('applychanges', 'applychanges', 1));
 
@@ -1413,12 +1415,13 @@ function mod_prj()
         $out->add(Form::getDropdown($lang->def('_PGROUP'), 'pgroup', 'pgroup', $group_arr, $row['pgroup']));
         $out->add(Form::getHidden('old_pgroup', 'old_pgroup', $row['pgroup']));
 
-        // TODO: add a fieldset labeled _POPTIONS
+        $out->add(Form::getOpenFieldset($lang->def('_POPTIONS')));
         $out->add(Form::getCheckbox($lang->def('_PSFILES'), 'psfiles', 'psfiles', 1, $row['psfiles']));
         $out->add(Form::getCheckbox($lang->def('_PSTASKS'), 'pstasks', 'pstasks', 1, $row['pstasks']));
         $out->add(Form::getCheckbox($lang->def('_PSNEWS'), 'psnews', 'psnews', 1, $row['psnews']));
         $out->add(Form::getCheckbox($lang->def('_PSTODO'), 'pstodo', 'pstodo', 1, $row['pstodo']));
         $out->add(Form::getCheckbox($lang->def('_PSMSG'), 'psmsg', 'psmsg', 1, $row['psmsg']));
+        $out->add(Form::getCloseFieldset());
 
         $out->add(Form::getHidden('applychanges', 'applychanges', 1));
 
