@@ -1474,13 +1474,28 @@ function modassigntime()
         UPDATE ' . $GLOBALS['prefix_lms'] . "_test
         SET display_type = '1'
         WHERE idTest = '$idTest'");
-        if ($re) {
-            while (list($idQuest, $difficult) = each($_REQUEST['new_difficult_quest'])) {
+        if ($re && !empty($_REQUEST['new_difficult_quest'])) {
+            $when_difficult = '';
+            $when_time = '';
+            $id_quests = [];
+            foreach ($_REQUEST['new_difficult_quest'] as $idQuest => $difficult) {
+                $idQuestInt = (int) $idQuest;
+                $id_quests[] = $idQuestInt;
+
+                $difficult_escaped = sql_escape_string($difficult);
+                $time_escaped = sql_escape_string($_REQUEST['new_time_quest'][$idQuest]);
+
+                $when_difficult .= " WHEN idQuest = '" . $idQuestInt . "' THEN '" . $difficult_escaped . "'";
+                $when_time .= " WHEN idQuest = '" . $idQuestInt . "' THEN '" . $time_escaped . "'";
+            }
+
+            if (!empty($id_quests)) {
+                $ids_str = implode(',', $id_quests);
                 $re &= sql_query('
-                UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
-                SET difficult = '" . $difficult . "', 
-                    time_assigned = '" . $_REQUEST['new_time_quest'][$idQuest] . "'
-                WHERE idTest = '$idTest' AND idQuest = '" . (int) $idQuest . "'");
+                UPDATE ' . $GLOBALS['prefix_lms'] . '_testquest
+                SET difficult = CASE ' . $when_difficult . ' ELSE difficult END,
+                    time_assigned = CASE ' . $when_time . ' ELSE time_assigned END
+                WHERE idTest = \'' . sql_escape_string($idTest) . '\' AND idQuest IN (' . $ids_str . ')');
             }
         }
         Util::jump_to('index.php?modname=test&op=modtestgui&idTest=' . $idTest . '&back_url=' . $url_coded . '&mod_operation=' . ($re ? 1 : 0));
