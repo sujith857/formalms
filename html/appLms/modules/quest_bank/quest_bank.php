@@ -330,7 +330,6 @@ function exportquest(&$url)
 				( author, title, description )
 					VALUES
 				( '" . (int) getLogUserId() . "', '" . $title . "', '" . $_POST['textof'] . "' )";
-                //TODO:
                 if (!sql_query($ins_query)) {
                     Forma::addError($lang->def('_OPERATION_FAILURE'));
                 }
