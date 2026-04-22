@@ -334,7 +334,7 @@ class CoursereportLmsController extends LmsController
                         case CoursereportLms::SOURCE_OF_TEST:
                                 $testObj = Learning_Test::load($info_report->getIdSource());
 
-                          
+
 
                                 $type = $testObj->getObjectType();
                                 $id = $info_report->getIdSource();
@@ -344,13 +344,13 @@ class CoursereportLmsController extends LmsController
 
                                 if ($mod_perm) {
                                     $chartLink = 'index.php?r=lms/coursereport/testQuestion&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
-                                 
+
 
                                     $editLink = 'index.php?r=lms/coursereport/testvote&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
                                     $trashLinkVisible = false;
                                 } elseif ($view_perm) {
                                     $chartLink = 'index.php?r=lms/coursereport/testQuestion&type_filter=' . $type_filter . '&id_test=' . $info_report->getIdSource();
-                                  
+
                                     $trashLinkVisible = false;
                                 }
 
@@ -739,7 +739,7 @@ class CoursereportLmsController extends LmsController
                                                         'active' => false,
                                                     ];
 
-                                        
+
                                                     $courseReportDetailValues[] = $value;
 
                                                 break;
@@ -777,7 +777,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                   
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -788,7 +788,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                               
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     } else {
@@ -801,7 +801,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                     
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -812,7 +812,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                                       
+
                                                             $courseReportDetailValues[] = $value;
                                                         } else {
                                                             $value = [
@@ -823,7 +823,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                      
+
                                                             $courseReportDetailValues[] = $value;
 
                                                             $value = [
@@ -834,7 +834,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => true,
                                                             ];
 
-                                                    
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     }
@@ -849,7 +849,7 @@ class CoursereportLmsController extends LmsController
                                                     'active' => false,
                                                 ];
 
-                                        
+
                                                 $courseReportDetailValues[] = $value;
                                         }
                                     } else {
@@ -861,7 +861,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => false,
                                         ];
 
-                                
+
                                         $courseReportDetailValues[] = $value;
                                     }
 
@@ -885,7 +885,7 @@ class CoursereportLmsController extends LmsController
                                         'active' => false,
                                     ];
 
-                            
+
                                     $courseReportDetailValues[] = $value;
 
                                     $history = $scormItem->getHistory();
@@ -899,7 +899,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => true,
                                         ];
 
-                                  
+
                                         $courseReportDetailValues[] = $value;
                                     }
                                     Events::trigger('lms.coursereport.detail', $event);
@@ -928,7 +928,7 @@ class CoursereportLmsController extends LmsController
                                                         'active' => false,
                                                     ];
 
-                                               
+
                                                     $courseReportDetailValues[] = $value;
 
                                                 break;
@@ -944,7 +944,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                        
+
                                                             $courseReportDetailValues[] = $value;
                                                         } else {
                                                             $value = [
@@ -955,7 +955,7 @@ class CoursereportLmsController extends LmsController
                                                                 'active' => false,
                                                             ];
 
-                                                    
+
                                                             $courseReportDetailValues[] = $value;
                                                         }
                                                     } else {
@@ -967,7 +967,7 @@ class CoursereportLmsController extends LmsController
                                                             'active' => false,
                                                         ];
 
-                                               
+
                                                         $courseReportDetailValues[] = $value;
                                                     }
 
@@ -981,7 +981,7 @@ class CoursereportLmsController extends LmsController
                                                     'active' => false,
                                                 ];
 
-                                        
+
                                                 $courseReportDetailValues[] = $value;
                                         }
                                     } else {
@@ -993,7 +993,7 @@ class CoursereportLmsController extends LmsController
                                             'active' => false,
                                         ];
 
-                                  
+
                                         $courseReportDetailValues[] = $value;
                                     }
                                     Events::trigger('lms.coursereport.detail', $event);
@@ -1083,7 +1083,7 @@ class CoursereportLmsController extends LmsController
                 $final_score[$id_user] = round(($user_score / ($sum_max_score + $sum_max_score_scorm)) * $info_final[0]->getMaxScore(), 2);
                 $sql = "
 					SELECT score FROM %lms_coursereport_score
-					WHERE id_user = $id_user 
+					WHERE id_user = $id_user
 					AND id_report = " . $info_final[0]->getIdReport() . '
 					ORDER BY date_attempt DESC LIMIT 1
 				';
@@ -1346,8 +1346,8 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
         require_once Forma::inc(_base_ . '/lib/lib.json.php');
 
-        // XXX: Initializaing
-        $id_test = importVar('id_test', true, 0);
+        // XXX: Initializing
+        $id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
@@ -1411,7 +1411,7 @@ class CoursereportLmsController extends LmsController
             return;
         }
         if (isset($_POST['confirm_reset'])) {
-            $id_user = importVar('id_user', true, 0);
+            $id_user = FormaLms\lib\Get::req('id_user', DOTY_INT, 0);
             if ($test_man->deleteTestTrack($id_test, $id_user)) {
                 $GLOBALS['page']->add(getResultUi($lang->def('_OPERATION_SUCCESSFUL')), 'content');
             } //($lang->def('_RESET_TRACK_SUCCESS')), 'content');
@@ -1666,7 +1666,7 @@ class CoursereportLmsController extends LmsController
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
 
-        $id_test = importVar('id_test', true, 0);
+        $id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
 
         $test_man = new GroupTestManagement();
         $acl_man = Docebo::user()->getAclManager();
@@ -1742,7 +1742,7 @@ class CoursereportLmsController extends LmsController
     {
         checkPerm('mod', true, $this->_mvc_name);
         $undo = FormaLms\lib\Get::pReq('undo_testreview', DOTY_MIXED, false);
-        $id_test = importVar('id_test', true, 0);
+        $id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
         if ($undo) {
             Util::jump_to('index.php?r=coursereport/testvote&id_test=' . $id_test);
         }
@@ -1750,10 +1750,10 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_lms_ . '/lib/lib.test.php');
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
 
-        // XXX: Initializaing
-        $id_track = importVar('idTrack', true, 0);
-        $number_time = importVar('number_time', true, null);
-        $delete = importVar('delete_track', false, null);
+        // XXX: Initializing
+        $id_track = FormaLms\lib\Get::req('idTrack', DOTY_INT, 0);
+        $number_time = FormaLms\lib\Get::req('number_time', DOTY_INT, null);
+        $delete = FormaLms\lib\Get::req('delete_track', DOTY_MIXED, null);
 
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -1769,7 +1769,7 @@ class CoursereportLmsController extends LmsController
             $re = $this->saveTestUpdate($id_test, $test_man);
             list($id_user) = each($_POST['view_answer']);
         } else {
-            $id_user = importVar('id_user', true, 0);
+            $id_user = FormaLms\lib\Get::req('id_user', DOTY_INT, 0);
         }
 
         if (isset($_POST['save_new_scores'])) {
@@ -1842,15 +1842,15 @@ class CoursereportLmsController extends LmsController
                   </div><!-- /.modal -->
                   <script type="text/javascript">
                            $( document ).ready(function() {
-                               
+
                                $("#detele-test-track").on( "click", function(event) {
-                                   
+
                                    event.preventDefault();
-                                   
+
                                    window.location.href = "index.php?r=lms/coursereport/testdelete&delete_track=' . md5($id_test . '_' . $id_user . '_' . $number_time) . '&id_test=' . $id_test . '&id_user=' . $id_user . '&number_time=' . $number_time . '&idTrack=' . $id_track . '";
                                });
-                               
-                               
+
+
                                $("#delete_test_track_modal").modal("show");
                            });
 
@@ -1875,12 +1875,12 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_lms_ . '/lib/lib.test.php');
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
 
-        // XXX: Initializaing
-        $id_test = importVar('id_test', true, 0);
-        $id_track = importVar('idTrack', true, 0);
-        $number_time = importVar('number_time', true, null);
-        $delete = importVar('delete_track', false, null);
-        $id_user = importVar('id_user', true, 0);
+        // XXX: Initializing
+        $id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
+        $id_track = FormaLms\lib\Get::req('idTrack', DOTY_INT, 0);
+        $number_time = FormaLms\lib\Get::req('number_time', DOTY_INT, null);
+        $delete = FormaLms\lib\Get::req('delete_track', DOTY_MIXED, null);
+        $id_user = FormaLms\lib\Get::req('id_user', DOTY_INT, 0);
 
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -1914,8 +1914,8 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
-        $id_report = importVar('id_report', true, 0);
+        // XXX: Initializing
+        $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
@@ -1968,7 +1968,7 @@ class CoursereportLmsController extends LmsController
         if (isset($_POST['save'])) {
             // retirive activity info
             //__construct($id_report, $title, $max_score, $required_score, $weight, $show_to_user, $use_for_final, $source_of, $id_source)
-            $info_report = new ReportLms(null, null, importVar('max_score', true), importVar('required_score', true), importVar('weight', true), importVar('show_to_user', false, 'true'), null, 'final_vote', importVar('max_score', true));
+            $info_report = new ReportLms(null, null, FormaLms\lib\Get::req('max_score', DOTY_INT, ''), FormaLms\lib\Get::req('required_score', DOTY_INT, ''), FormaLms\lib\Get::req('weight', DOTY_INT, ''), FormaLms\lib\Get::req('show_to_user', DOTY_MIXED, 'true'), null, 'final_vote', FormaLms\lib\Get::req('max_score', DOTY_INT, ''));
         } else {
             // retirive activity info
 
@@ -2089,8 +2089,8 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
-        //$id_test = importVar('id_test', true, 0);
+        // XXX: Initializing
+        //$id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
@@ -2145,7 +2145,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
 
         // XXX: Instance management
@@ -2276,7 +2276,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2289,7 +2289,7 @@ class CoursereportLmsController extends LmsController
 
         // XXX: Retrive all colums (test and so), and set it
         if ($id_report == 0) {
-            $info_report = new ReportLms(importVar('id_report', true, null), importVar('title'), importVar('max_score', true), importVar('required_score', true), importVar('weight', true), importVar('show_to_user', true, true), importVar('use_for_final', true, true), '', 0);
+            $info_report = new ReportLms(FormaLms\lib\Get::req('id_report', DOTY_INT, null), FormaLms\lib\Get::req('title', DOTY_MIXED, ''), FormaLms\lib\Get::req('max_score', DOTY_INT, ''), FormaLms\lib\Get::req('required_score', DOTY_INT, ''), FormaLms\lib\Get::req('weight', DOTY_INT, ''), FormaLms\lib\Get::req('show_to_user', DOTY_INT, true), FormaLms\lib\Get::req('use_for_final', DOTY_INT, true), '', 0);
         } elseif (!isset($_POST['save'])) {
             $this->model = new CoursereportLms($this->idCourse, $id_report, 'activity', '0');
 
@@ -2498,8 +2498,8 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
-        $id_report = importVar('id_report', true, 0);
+        // XXX: Initializing
+        $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
@@ -2512,7 +2512,7 @@ class CoursereportLmsController extends LmsController
         // XXX: Retrive all colums (test and so), and set it
 
         if ($id_report == 0) {
-            $info_report = new ReportLms(importVar('id_report', true, null), importVar('title'), importVar('max_score', true), importVar('required_score', true), importVar('weight', true), importVar('show_to_user', true, true), importVar('use_for_final', true, true), '', 0);
+            $info_report = new ReportLms(FormaLms\lib\Get::req('id_report', DOTY_INT, null), FormaLms\lib\Get::req('title', DOTY_MIXED, ''), FormaLms\lib\Get::req('max_score', DOTY_INT, ''), FormaLms\lib\Get::req('required_score', DOTY_INT, ''), FormaLms\lib\Get::req('weight', DOTY_INT, ''), FormaLms\lib\Get::req('show_to_user', DOTY_INT, true), FormaLms\lib\Get::req('use_for_final', DOTY_INT, true), '', 0);
         } elseif (!isset($_POST['save'])) {
             $this->model = new CoursereportLms($this->idCourse, $id_report, 'activity', '0');
 
@@ -2623,8 +2623,8 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
-        $id_report = importVar('id_report', true, 0);
+        // XXX: Initializing
+        $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
         $out->setWorkingZone('content');
@@ -2645,7 +2645,7 @@ class CoursereportLmsController extends LmsController
         $students_info = &$acl_man->getUsers($id_students);
 
         if (isset($_POST['save'])) {
-            $info_report = new ReportLms(importVar('id_report', true, null), importVar('title'), importVar('max_score', true), importVar('required_score', true), importVar('weight', true), importVar('show_to_user', true, true), importVar('use_for_final', true, true), '', 0);
+            $info_report = new ReportLms(FormaLms\lib\Get::req('id_report', DOTY_INT, null), FormaLms\lib\Get::req('title', DOTY_MIXED, ''), FormaLms\lib\Get::req('max_score', DOTY_INT, ''), FormaLms\lib\Get::req('required_score', DOTY_INT, ''), FormaLms\lib\Get::req('weight', DOTY_INT, ''), FormaLms\lib\Get::req('show_to_user', DOTY_INT, true), FormaLms\lib\Get::req('use_for_final', DOTY_INT, true), '', 0);
         } else {
             $this->model = new CoursereportLms($this->idCourse, $id_report, ['activity', 'scoitem']);
 
@@ -2860,7 +2860,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = FormaLms\lib\Get::gReq('id_report', DOTY_MIXED, 0);
 
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
@@ -2919,8 +2919,8 @@ class CoursereportLmsController extends LmsController
 
         require_once Forma::inc(_lms_ . '/lib/lib.coursereport.php');
 
-        // XXX: Initializaing
-        $id_report = importVar('id_report', true, 0);
+        // XXX: Initializing
+        $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
 
         // XXX: Instance management
@@ -3438,7 +3438,7 @@ class CoursereportLmsController extends LmsController
 
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
 
-        $idTest = importVar('id_test', true, 0);
+        $idTest = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
 
         $test_man = new GroupTestManagement();
 
@@ -3683,7 +3683,7 @@ class CoursereportLmsController extends LmsController
             . ' setup_coursereport(\'' . $GLOBALS['where_lms_relative'] . '/ajax.server.php?plf=lms&mn=coursereport&\'); '
             . '</script>', 'page_head');
 
-        $id_test = importVar('id_test', true, 0);
+        $id_test = FormaLms\lib\Get::req('id_test', DOTY_INT, 0);
 
         $test_man = new GroupTestManagement();
 
