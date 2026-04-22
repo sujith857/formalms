@@ -2285,7 +2285,6 @@ function reservationDispatch($op)
         case 'del_laboratory':
             delLaboratory();
         break;*/
-        //TODO:
         case 'classroom' :
             classroom();
         break;
@@ -2305,7 +2304,6 @@ function reservationDispatch($op)
         case 'delclassroom' :
             delclassroom();
         break;
-        //TODO:
         case 'switch_subscription':
             switchSubscription();
         break;
