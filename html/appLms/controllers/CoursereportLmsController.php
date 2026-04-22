@@ -1385,7 +1385,7 @@ class CoursereportLmsController extends LmsController
         // XXX: Reset track of user
         if (isset($_POST['reset_track'])) {
             $re = $this->saveTestUpdate($id_test, $test_man);
-            list($id_user) = each($_POST['reset_track']);
+            $id_user = key($_POST['reset_track']);
 
             $user_info = $acl_man->getUser($id_user, false);
 
@@ -1532,7 +1532,7 @@ class CoursereportLmsController extends LmsController
 
         // XXX: Display user scores
         $i = 0;
-        while (list($idst_user, $user_info) = each($students_info)) {
+        foreach ($students_info as $idst_user => $user_info) {
             $user_name = ($user_info[ACL_INFO_LASTNAME] . $user_info[ACL_INFO_FIRSTNAME]
                 ? $user_info[ACL_INFO_LASTNAME] . ' ' . $user_info[ACL_INFO_FIRSTNAME]
                 : $acl_man->relativeId($user_info[ACL_INFO_USERID]));
@@ -1767,7 +1767,7 @@ class CoursereportLmsController extends LmsController
         // XXX: Save input if needed
         if (isset($_POST['view_answer'])) {
             $re = $this->saveTestUpdate($id_test, $test_man);
-            list($id_user) = each($_POST['view_answer']);
+            $id_user = key($_POST['view_answer']);
         } else {
             $id_user = importVar('id_user', true, 0);
         }
@@ -2026,7 +2026,7 @@ class CoursereportLmsController extends LmsController
 
         // XXX: Display user scores
         $i = 0;
-        while (list($idst_user, $user_info) = each($students_info)) {
+        foreach ($students_info as $idst_user => $user_info) {
             $user_name = ($user_info[ACL_INFO_LASTNAME] . $user_info[ACL_INFO_FIRSTNAME]
                 ? $user_info[ACL_INFO_LASTNAME] . ' ' . $user_info[ACL_INFO_FIRSTNAME]
                 : $acl_man->relativeId($user_info[ACL_INFO_USERID]));
@@ -2196,7 +2196,7 @@ class CoursereportLmsController extends LmsController
 
         $final_score = [];
 
-        while (list(, $id_user) = each($id_students)) {
+        foreach ($id_students as $id_user) {
             $user_score = 0;
 
             foreach ($reports as $info_report) {
@@ -2242,7 +2242,7 @@ class CoursereportLmsController extends LmsController
 
         $re = true;
 
-        while (list($user, $score) = each($final_score)) {
+        foreach ($final_score as $user => $score) {
             if (isset($exists_final[$user])) {
                 $query_scores = "
 			UPDATE %lms_coursereport_score
@@ -2785,7 +2785,7 @@ class CoursereportLmsController extends LmsController
 
             // XXX: Display user scores
             $i = 0;
-            while (list($idst_user, $user_info) = each($students_info)) {
+            foreach ($students_info as $idst_user => $user_info) {
                 $user_name = ($user_info[ACL_INFO_LASTNAME] . $user_info[ACL_INFO_FIRSTNAME]
                     ? $user_info[ACL_INFO_LASTNAME] . ' ' . $user_info[ACL_INFO_FIRSTNAME]
                     : $acl_man->relativeId($user_info[ACL_INFO_USERID]));
@@ -3178,8 +3178,8 @@ class CoursereportLmsController extends LmsController
 
         $test_details = [];
         if (is_array($included_test)) {
-            while (list($id_test, $users_result) = each($tests_score)) {
-                while (list($id_user, $single_test) = each($users_result)) {
+            foreach ($tests_score as $id_test => $users_result) {
+                foreach ($users_result as $id_user => $single_test) {
                     if ($single_test['score_status'] == 'valid') {
                         if (!isset($test_details[$id_test]['max_score'])) {
                             $test_details[$id_test]['max_score'] = $single_test['score'];
@@ -3207,7 +3207,7 @@ class CoursereportLmsController extends LmsController
                     }
                 }
             }
-            while (list($id_test, $single_detail) = each($test_details)) {
+            foreach ($test_details as $id_test => $single_detail) {
                 if (isset($single_detail['num_result'])) {
                     $test_details[$id_test]['average'] /= $test_details[$id_test]['num_result'];
                 }
@@ -3219,8 +3219,8 @@ class CoursereportLmsController extends LmsController
         );
 
         $report_details = [];
-        while (list($id_report, $users_result) = each($reports_score)) {
-            while (list($id_user, $single_report) = each($users_result)) {
+        foreach ($reports_score as $id_report => $users_result) {
+            foreach ($users_result as $id_user => $single_report) {
                 if ($single_report['score_status'] == 'valid') {
                     if (!isset($report_details[$id_report]['max_score'])) {
                         $report_details[$id_report]['max_score'] = $single_report['score'];
@@ -3248,7 +3248,7 @@ class CoursereportLmsController extends LmsController
                 }
             }
         }
-        while (list($id_report, $single_detail) = each($report_details)) {
+        foreach ($report_details as $id_report => $single_detail) {
             if (isset($single_detail['num_result'])) {
                 $report_details[$id_report]['average'] /= $report_details[$id_report]['num_result'];
             }
@@ -3256,7 +3256,7 @@ class CoursereportLmsController extends LmsController
         reset($report_details);
 
         if (!empty($students_info)) {
-            while (list($idst_user, $user_info) = each($students_info)) {
+            foreach ($students_info as $idst_user => $user_info) {
                 $user_name = ($user_info[ACL_INFO_LASTNAME] . $user_info[ACL_INFO_FIRSTNAME]
                     ? $user_info[ACL_INFO_LASTNAME] . ' ' . $user_info[ACL_INFO_FIRSTNAME]
                     : $acl_man->relativeId($user_info[ACL_INFO_USERID]));
