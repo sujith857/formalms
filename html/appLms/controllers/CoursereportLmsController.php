@@ -1346,7 +1346,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
         require_once Forma::inc(_base_ . '/lib/lib.json.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_test = importVar('id_test', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -1750,7 +1750,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_lms_ . '/lib/lib.test.php');
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_track = importVar('idTrack', true, 0);
         $number_time = importVar('number_time', true, null);
         $delete = importVar('delete_track', false, null);
@@ -1875,7 +1875,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_lms_ . '/lib/lib.test.php');
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_test = importVar('id_test', true, 0);
         $id_track = importVar('idTrack', true, 0);
         $number_time = importVar('number_time', true, null);
@@ -1914,7 +1914,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = importVar('id_report', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2089,7 +2089,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         //$id_test = importVar('id_test', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2145,7 +2145,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
 
         // XXX: Instance management
@@ -2276,7 +2276,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = FormaLms\lib\Get::req('id_report', DOTY_INT, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2498,7 +2498,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = importVar('id_report', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2623,7 +2623,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = importVar('id_report', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
         $out = &$GLOBALS['page'];
@@ -2860,7 +2860,7 @@ class CoursereportLmsController extends LmsController
         require_once Forma::inc(_base_ . '/lib/lib.form.php');
         require_once Forma::inc(_base_ . '/lib/lib.table.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = FormaLms\lib\Get::gReq('id_report', DOTY_MIXED, 0);
 
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
@@ -2919,7 +2919,7 @@ class CoursereportLmsController extends LmsController
 
         require_once Forma::inc(_lms_ . '/lib/lib.coursereport.php');
 
-        // XXX: Initializaing
+        // XXX: Initializing
         $id_report = importVar('id_report', true, 0);
         $lang = &DoceboLanguage::createInstance('coursereport', 'lms');
 
