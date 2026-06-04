@@ -144,4 +144,13 @@ copy and rename `/test/behat/behat_config.yml.dist` and change `base_url` to you
 * To set params for the event
 * `\Events::trigger('platform.upgrade', [_upgradeclass_ => formatUpgradeClass(__CLASS__, "pre"), "params" =>["arg1"=> "val1",...."argN" => "valN"]]);`
 
+# Start
+docker compose up -d
+
+# Stop
+docker compose down
+
+# View logs
+docker compose logs -f web
+
 

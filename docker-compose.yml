@@ -1,0 +1,29 @@
+services:
+  web:
+    build: ./docker
+    ports:
+      - "8081:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./composer.phar:/var/www/composer.phar:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: UTC
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: forma
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
