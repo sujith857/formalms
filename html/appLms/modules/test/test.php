@@ -643,20 +643,21 @@ function fixPageSequence($id_test)
     $page_num = 1;
     //first page
     $ini_seq = 0;
+
+    $cases = [];
     while (list($break_sequence) = sql_fetch_row($re_break_page)) {
-        sql_query('
-        UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
-        SET page = '" . (int) $page_num . "'
-        WHERE idTest = '" . (int) $id_test . "' AND
-            sequence > '" . (int) $ini_seq . "' AND sequence <= '" . (int) $break_sequence . "'");
+        $cases[] = "WHEN sequence > '" . (int) $ini_seq . "' AND sequence <= '" . (int) $break_sequence . "' THEN '" . (int) $page_num . "'";
         $ini_seq = $break_sequence;
         ++$page_num;
     }
+    $cases[] = "WHEN sequence > '" . (int) $ini_seq . "' AND sequence <= '" . (int) $tot_quest . "' THEN '" . (int) $page_num . "'";
+
+    $case_sql = implode(' ', $cases);
+
     sql_query('
     UPDATE ' . $GLOBALS['prefix_lms'] . "_testquest
-    SET page = '" . (int) $page_num . "'
-    WHERE idTest = '" . (int) $id_test . "' AND
-        sequence > '" . (int) $ini_seq . "' AND sequence <= '" . (int) $tot_quest . "'");
+    SET page = CASE " . $case_sql . " ELSE page END
+    WHERE idTest = '" . (int) $id_test . "'");
 }
 
 function istanceQuest($type_of_quest, $id)
