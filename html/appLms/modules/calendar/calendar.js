@@ -1528,7 +1528,7 @@ Date.prototype.print = function (str) {
 	s["%A"] = _TT._DN[w]; // full weekday name
 	s["%b"] = _TT._SMN[m]; // abbreviated month name [FIXME: I18N]
 	s["%B"] = _TT._MN[m]; // full month name
-	// FIXME: %c : preferred date and time representation for the current locale
+	s["%c"] = s["%a"] + " " + s["%b"] + " " + d + " " + (hr < 10 ? "0" + hr : hr) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec) + " " + y; // preferred date and time representation for the current locale
 	s["%C"] = 1 + Math.floor(y / 100); // the century number
 	s["%d"] = (d < 10) ? ("0" + d) : d; // the day of the month (range 01 to 31)
 	s["%e"] = d; // the day of the month (range 1 to 31)
