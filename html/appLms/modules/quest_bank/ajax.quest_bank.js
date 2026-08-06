@@ -54,7 +54,7 @@ function select_all_filtered(e) {
 	// i must ask to the server for the id complete list
 	var callback = { success: callback_selectallfilter, failure: callback_selectallfilter }
 	var args = 'op=getselected';
-        if (QB_CATEGORIES.length>0){
+        if (QB_CATEGORIES.length>1){
             args += '&quest_category=' + YAHOO.util.Dom.get('quest_category').value;
         }
 	args += '&quest_difficult=' + YAHOO.util.Dom.get('quest_difficult').value;
@@ -304,7 +304,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 			];
 	var dyncol;
         // todo: nascondere la colonna se vuoto (attenzione contiene sempre un elemento (Any))
-	if(QB_CATEGORIES.length>0) {
+	if(QB_CATEGORIES.length>1) {
             dyncol = {key:"category_quest",	label:QB_DEF.quest_category, 	formatter:this.formatCategoryQuest, sortable:false };
             myColumnDefs.push(dyncol);
         }
@@ -344,7 +344,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 			sort = (state.sortedBy) ? state.sortedBy.key : null;
 			dir = (state.sortedBy && state.sortedBy.dir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
             var querystring='';
-            if (QB_CATEGORIES.length>0){
+            if (QB_CATEGORIES.length>1){
                 querystring = 'quest_category=' + YAHOO.util.Dom.get('quest_category').value;
             }
                 querystring += '&quest_difficult=' + YAHOO.util.Dom.get('quest_difficult').value;
@@ -360,7 +360,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		
 	};
 	var sorted_by="";
-        if (QB_CATEGORIES.length>0){
+        if (QB_CATEGORIES.length>1){
             sorted_by="category_quest";
         }
 		var oConfig = {
